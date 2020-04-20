@@ -1,0 +1,72 @@
+<html lang="en"></html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Three JS</title>
+        <%- include ('../partials/head') %>
+      </head>
+    <body>
+        <%- include ('../partials/navbar') %>
+        <canvas id="sceneCanvas"></canvas>
+    </body>
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+</html>
+
+<script>
+    let scene, camera, renderer, shape;
+    let ADD = 0.02;
+
+    let createGeometry = function() {
+        let geometry = new THREE.Geometry();
+        //Create vertices and faces
+        geometry.vertices.push( new THREE.Vector3(3, 0, 0));
+        geometry.vertices.push( new THREE.Vector3(0, 5, 0));
+        geometry.vertices.push( new THREE.Vector3(0, 0, 2));
+        geometry.vertices.push( new THREE.Vector3(1, 2, -2));
+
+        geometry.faces.push(new THREE.Face3(0, 1, 2));
+        geometry.faces.push(new THREE.Face3(1, 2, 3));
+        geometry.faces.push(new THREE.Face3(0, 2, 3));
+
+        let material = new THREE.MeshBasicMaterial(
+                                        {color: 0xffffff,
+                                        side:THREE.DoubleSide,
+                                        wireframe: true});
+        shape = new THREE.Mesh( geometry, material );
+        scene.add(shape);
+    };
+
+    // set up the environment -
+    // initiallize scene, camera, objects and renderer
+    let init = function() {
+        // create the scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+
+        // create an locate the camera
+        camera = new THREE.PerspectiveCamera(75,
+                        window.innerWidth / window.innerHeight,
+                        1, 1000);
+        camera.position.z = 20;
+
+        createGeometry();
+
+        // create the renderer
+        renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
+        renderer.setSize(window.innerWidth, window.innerHeight-100);
+    };
+
+    // main animation loop - calls 50-60 times per second.
+    let mainLoop = function() {
+        shape.geometry.vertices[1].y -= 0.02;
+        shape.geometry.verticesNeedUpdate = true;//needed otherwise updates on shape won't show
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(mainLoop);
+    };
+
+    ///////////////////////////////////////////////
+    init();
+    mainLoop();
+</script>
