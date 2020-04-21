@@ -17,23 +17,42 @@ app.get('/', function(req, res) {
 });
 
 app.get('/donuts', function(req, res) {//route (= url in navbar.ejs)
-    res.render('pages/donuts-rain');//view
+    res.render('pages/geometry/donuts-rain');//view
 });
 
 app.get('/saturn', function(req, res) {
-    res.render('pages/saturn');
+    res.render('pages/geometry/saturn');
 });
 
 app.get('/cust-geo', function(req, res) {
-    res.render('pages/custom-geometry');
+    res.render('pages/geometry/custom-geometry');
 });
 
 app.get('/butterfly', function(req, res) {
-    res.render('pages/butterfly');
+    res.render('pages/geometry/butterfly');
 });
 
 app.get('/text-geo', function(req, res) {
-    res.render('pages/text-geometry');
+    res.render('pages/geometry/text-geometry');
+});
+
+app.get('/mat-basic', function(req, res) {
+    res.render('pages/materials/basic');
+});
+
+app.get('/mat-normal', function(req, res) {
+    res.render('pages/materials/normal');
+});
+
+app.get('/mat-depth', function(req, res) {
+    res.render('pages/materials/depth');
+});
+app.get('/mat-line-points', function(req, res) {
+    res.render('pages/materials/line-points');
+});
+
+app.get('/mat-particles', function(req, res) {
+    res.render('pages/materials/particles');
 });
 
 

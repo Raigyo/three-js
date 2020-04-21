@@ -5,18 +5,16 @@
         <%- include ('../../partials/head') %>
       </head>
     <body>
-        <%- include ('../partials/navbar') %>
+        <%- include ('../../partials/navbar') %>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
-        <%- include ('../partials/footer') %>
+        <%- include ('../../partials/footer') %>
     </footer>
 </html>
 
 <script>
     let scene, camera, renderer;
-
-    let ADD = 0.01;
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -45,9 +43,6 @@
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
-        camera.position.y += ADD;
-        if(camera.position.y >= 5 || camera.position.y <= -5)
-            ADD *= -1;
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };

@@ -2,15 +2,15 @@
       <head>
         <meta charset="UTF-8">
         <title>Three JS</title>
-        <%- include ('../partials/head') %>
+        <%- include ('../../partials/head') %>
       </head>
     <body>
-        <%- include ('../partials/navbar') %>
+        <%- include ('../../partials/navbar') %>
         <canvas id="sceneCanvas"></canvas>
   </div>
     </body>
     <footer>
-        <%- include ('../partials/footer') %>
+        <%- include ('../../partials/footer') %>
     </footer>
 </html>
 
@@ -18,7 +18,6 @@
     let scene, camera, renderer, text;
     let ADD = 0.01, theta = 0;
     init();
-    addSphere();
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -33,7 +32,7 @@
         1, 150);
       camera.position.set(0, 5, 40);
 
-      //Load font. and create material (async)
+      //Load font.json and create material (async)
       let loader = new THREE.FontLoader();
       let titles = "99 bottles of beer on the wall,\n99 bottles of beer.\nTake one down, pass it around,\n98 bottles of beer on the wall,\n98 bottles of beer.\nTake one down, pass it around,\n97 bottles of beer on the wall,\n97 bottles of beer.\nTake one down, pass it around,\n96 bottles of beer on the wall,\n96 bottles of beer.\nTake one down, pass it around,\n95 bottles of beer on the wall,\n95 bottles of beer.";
       loader.load( 'public/fonts/helvetiker_bold.typeface.json', function ( font ) {
@@ -56,7 +55,6 @@
         }
         animate();
       })
-
 
       // create the renderer
       renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );

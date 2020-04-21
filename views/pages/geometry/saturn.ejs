@@ -3,14 +3,14 @@
       <head>
         <meta charset="UTF-8">
         <title>Three JS</title>
-        <%- include ('../partials/head') %>
+        <%- include ('../../partials/head') %>
       </head>
     <body>
-        <%- include ('../partials/navbar') %>
+        <%- include ('../../partials/navbar') %>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
-        <%- include ('../partials/footer') %>
+        <%- include ('../../partials/footer') %>
     </footer>
 </html>
 
@@ -69,8 +69,8 @@
         createSaturn();
 
         // add axes to the scenes
-        axes = new THREE.AxesHelper(10);
-        scene.add(axes);
+        // axes = new THREE.AxesHelper(10);
+        // scene.add(axes);
 
         // create the renderer
         renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
