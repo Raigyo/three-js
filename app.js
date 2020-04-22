@@ -61,6 +61,10 @@ app.get('/mat-light-sensitive', function(req, res) {
     res.render('pages/materials/light-sensitive');
 });
 
+app.get('/mat-fragment-movement', function(req, res) {
+    res.render('pages/materials/fragment-movement');
+});
+
 //lights
 app.get('/lights-ambiant', function(req, res) {
     res.render('pages/lights/ambiant');
@@ -80,6 +84,10 @@ app.get('/lights-point', function(req, res) {
 
 app.get('/lights-spot', function(req, res) {
     res.render('pages/lights/spot');
+});
+
+app.get('/several-spots', function(req, res) {
+    res.render('pages/lights/several-spots');
 });
 
 //camera

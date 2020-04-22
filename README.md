@@ -14,28 +14,35 @@ Concepts covered:
 
 ### Working with Geometry
 
-- Scene, camera, renderer
-- Shapes: points/vertices, segments/edge, faces, meshes
-- Cube, sphere, torus
-- Vector3, position, rotation
-- Text geometry
+- Scene, camera, renderer.
+- Geometry: points/vertices normal, segments/edge, faces/faces normal, meshes.
+- Shapes: Cube, sphere, torus, custom geometry.
+- Movement and Vector3, position, rotation.
+- Text geometry.
 
 ### Working with Materials
 
-- MeshBasicMaterial: not affected by light
-- MeshNormalMaterial: not affected by light but each faces has a different color
+- MeshBasicMaterial: not affected by light.
+- MeshNormalMaterial: not affected by light but each faces has a different color.
 - MeshDepthMaterial: not affected by light butassign different colors according
-to the distance from camera
-- MeshLambertMaterial: affected by light, for non-shiny surfaces, without specular highlights
+to the distance from camera.
+- MeshLambertMaterial: affected by light, for non-shiny surfaces, without specular highlights.
 - MeshPhongMateriall: affected by light, for shiny surfaces with specular highlights.
 - MeshStandardMaterial: affected by light, standard physically based material,
-using Metallic-Roughness workflow
+using Metallic-Roughness workflow.
 
 Note: A specular highlight is the bright spot of light that appears on shiny objects
 when illuminated.
 
 ### Lights
 
+- Ambiant light: illuminates everywhere in the same level.
+It doesn't come from a specific direction.
+- Hemisphere light: fades as it goess from the top to the bottom.
+It doesn't come from a specific direction.
+- Directional light: comes from a light source and aims to a direction (like the sun light).
+- Point light: radiates from a single point to all directions. The light fades as a function of the distance from the light source like a bulb.
+- Spot light: is a light that comes from a single point (like a spot) and it forms a cone shape.
 
 ### Camera
 

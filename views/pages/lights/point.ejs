@@ -14,7 +14,33 @@
 </html>
 
 <script>
-    let scene, camera, renderer;
+    //Point light: radiates from a single point to all directions.
+    //The light fades as a function of the distance from the light source.
+    let scene, camera, renderer, light, light2;
+    let cube, sphere1, sphere2;
+    let ADD = 0.03, theta = 0;
+
+
+    let createGeometry = function() {
+
+        let geometry = new THREE.BoxGeometry(5, 5, 5);
+        let material = new THREE.MeshPhongMaterial({color: 0Xdff913, shininess: 100, side: THREE.DoubleSide});
+        cube = new THREE.Mesh(geometry, material);
+        cube.rotation.x = 0.6;
+        cube.rotation.y = 0.6;
+
+        geometry = new THREE.SphereGeometry(0.1, 30, 30);
+        material = new THREE.MeshBasicMaterial({color: 0xffffff});
+        sphere1 = new THREE.Mesh(geometry, material);
+
+        geometry = new THREE.SphereGeometry(0.1, 30, 30);
+        material = new THREE.MeshBasicMaterial({color: 0xffffff});
+        sphere2 = new THREE.Mesh(geometry, material);
+
+        scene.add(cube);
+        scene.add(sphere1);
+        scene.add(sphere2);
+    };
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -29,11 +55,16 @@
                         1, 1000);
         camera.position.z = 20;
 
-        //fctCall()
+        light = new THREE.PointLight(0xffffff, 2, 20, 2);//color, intensity, distance, decay
+        //distance from the light source. 0 by default. If 0 the light never fade away.
+        //decay: The amount the light dims along the distance of the light. Default is 1.
+        light.position.y = 5;
+        light2 = new THREE.PointLight(0xffffff, 2, 20, 2);
 
-        // add axes to the scenes
-        axes = new THREE.AxesHelper(10);
-        scene.add(axes);
+        scene.add(light);
+        scene.add(light2);
+
+        createGeometry();
 
         // create the renderer
         renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
@@ -43,6 +74,19 @@
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
+
+        light.position.x = 6 * Math.sin(theta);//light movement
+        light.position.z = 6 * Math.cos(theta);
+        sphere1.position.x = light.position.x;//sphere follows the light
+        sphere1.position.z = light.position.z;
+
+        light2.position.y = -10 * Math.sin(theta);//light movement
+        light2.position.z = -10 * Math.cos(theta);
+        sphere2.position.y = light2.position.y;//sphere 2 follows the light
+        sphere2.position.z = light2.position.z;
+
+        theta += ADD;
+
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };

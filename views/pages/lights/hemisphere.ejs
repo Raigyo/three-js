@@ -14,7 +14,36 @@
 </html>
 
 <script>
-    let scene, camera, renderer;
+    //Hemisphere light: fades as it goess from the top to the bottom.
+    //It doesn't come from a specific direction.
+    let scene, camera, renderer, light;
+    let cube, sphere, plane;
+    let ADD = 0.02;
+
+    let createGeometry = function() {
+
+        let geometry = new THREE.BoxGeometry(5, 5, 5);
+        let material = new THREE.MeshPhongMaterial({color: 0Xdff913,
+                                    shininess: 100, side: THREE.DoubleSide});
+        cube = new THREE.Mesh(geometry, material);
+        cube.position.set(5, 0, 0);
+
+        geometry = new THREE.SphereGeometry(5, 30, 30);
+        material = new THREE.MeshPhongMaterial({color: 0X66cdaa,
+                                    shininess: 100, side: THREE.DoubleSide});
+        sphere = new THREE.Mesh(geometry, material);
+        sphere.position.set(-5, 5, -5);
+
+        geometry = new THREE.BoxGeometry(2000, 1, 2000);//plateau
+        material = new THREE.MeshPhongMaterial({color: 0X693421,
+                                                side: THREE.DoubleSide});
+        plane = new THREE.Mesh(geometry, material);
+        plane.position.y = -1;
+
+        scene.add(cube);
+        scene.add(sphere);
+        scene.add(plane);
+    };
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -27,13 +56,15 @@
         camera = new THREE.PerspectiveCamera(75,
                         window.innerWidth / window.innerHeight,
                         1, 1000);
-        camera.position.z = 20;
+        camera.position.set(0, 10, 20);
 
-        //fctCall()
+        // light = new THREE.AmbientLight(0x63b8ff);
+        light = new THREE.HemisphereLight(0x00ff00, 0x0000ff);
+        //skyColor (green), groundColor(blue), intensity
 
-        // add axes to the scenes
-        axes = new THREE.AxesHelper(10);
-        scene.add(axes);
+        scene.add(light);
+
+        createGeometry();
 
         // create the renderer
         renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
@@ -41,8 +72,11 @@
         //document.body.appendChild(renderer.domElement);
     };
 
-    // main animation loop - calls 50-60 times per second.
-    let mainLoop = function() {
+     // main animation loop - calls 50-60 times per second.
+     let mainLoop = function() {
+        light.intensity += ADD;
+        if(light.intensity >= 3 || light.intensity <= 1)//we change the intensity
+            ADD *= -1;
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };
