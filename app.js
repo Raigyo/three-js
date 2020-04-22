@@ -16,6 +16,7 @@ app.get('/', function(req, res) {
     res.render('pages/index');
 });
 
+//geometry
 app.get('/donuts', function(req, res) {//route (= url in navbar.ejs)
     res.render('pages/geometry/donuts-rain');//view
 });
@@ -36,6 +37,7 @@ app.get('/text-geo', function(req, res) {
     res.render('pages/geometry/text-geometry');
 });
 
+//materials
 app.get('/mat-basic', function(req, res) {
     res.render('pages/materials/basic');
 });
@@ -53,6 +55,79 @@ app.get('/mat-line-points', function(req, res) {
 
 app.get('/mat-particles', function(req, res) {
     res.render('pages/materials/particles');
+});
+
+app.get('/mat-light-sensitive', function(req, res) {
+    res.render('pages/materials/light-sensitive');
+});
+
+//lights
+app.get('/lights-ambiant', function(req, res) {
+    res.render('pages/lights/ambiant');
+});
+
+app.get('/lights-directional', function(req, res) {
+    res.render('pages/lights/directional');
+});
+
+app.get('/lights-hemisphere', function(req, res) {
+    res.render('pages/lights/hemisphere');
+});
+
+app.get('/lights-point', function(req, res) {
+    res.render('pages/lights/point');
+});
+
+app.get('/lights-spot', function(req, res) {
+    res.render('pages/lights/spot');
+});
+
+//camera
+app.get('/cam-orthographic', function(req, res) {
+    res.render('pages/camera/orthographic');
+});
+
+app.get('/cam-perspective', function(req, res) {
+    res.render('pages/camera/perspective');
+});
+
+//user interaction
+app.get('/user-kb-event', function(req, res) {
+    res.render('pages/user-interaction/keyboard-event');
+});
+
+app.get('/user-ms-event', function(req, res) {
+    res.render('pages/user-interaction/mouse-event');
+});
+
+app.get('/user-ms-picking', function(req, res) {
+    res.render('pages/user-interaction/mouse-picking');
+});
+
+app.get('/user-ray', function(req, res) {
+    res.render('pages/user-interaction/ray-object');
+});
+
+//add realism
+app.get('/real-textures', function(req, res) {
+    res.render('pages/realism/textures');
+});
+
+app.get('/real-panorama', function(req, res) {
+    res.render('pages/realism/panorama');
+});
+
+app.get('/real-shadows', function(req, res) {
+    res.render('pages/realism/shadows');
+});
+
+app.get('/real-shadows', function(req, res) {
+    res.render('pages/realism/shadows');
+});
+
+//final challenge
+app.get('/final-challenge', function(req, res) {
+    res.render('pages/final/final-challenge');
 });
 
 

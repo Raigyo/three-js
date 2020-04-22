@@ -1,0 +1,53 @@
+<html lang="en"></html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Three JS</title>
+        <%- include ('../../partials/head') %>
+      </head>
+    <body>
+        <%- include ('../../partials/navbar') %>
+        <canvas id="sceneCanvas"></canvas>
+    </body>
+    <footer>
+        <%- include ('../../partials/footer') %>
+    </footer>
+</html>
+
+<script>
+    let scene, camera, renderer;
+
+    // set up the environment -
+    // initiallize scene, camera, objects and renderer
+    let init = function() {
+        // create the scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+
+        // create an locate the camera
+        camera = new THREE.PerspectiveCamera(75,
+                        window.innerWidth / window.innerHeight,
+                        1, 1000);
+        camera.position.z = 20;
+
+        //fctCall()
+
+        // add axes to the scenes
+        axes = new THREE.AxesHelper(10);
+        scene.add(axes);
+
+        // create the renderer
+        renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
+        renderer.setSize(window.innerWidth, window.innerHeight-100);
+        //document.body.appendChild(renderer.domElement);
+    };
+
+    // main animation loop - calls 50-60 times per second.
+    let mainLoop = function() {
+        renderer.render(scene, camera);
+        requestAnimationFrame(mainLoop);
+    };
+
+    ///////////////////////////////////////////////
+    init();
+    mainLoop();
+</script>
