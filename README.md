@@ -4,7 +4,7 @@
 
 > 🔨 Three.js main concepts. From Udemy
 '[3D Programming with JavaScript and the Three.js 3D Library](https://www.udemy.com/course/3d-programming-with-javascript-and-the-threejs-3d-library/): Create 3D computer graphics,
-using webgl in a cross-browser environment. Learn about 3D Graphical space, and 3D Depth.'.
+using webgl in a cross-browser environment. Learn about 3D Graphical space, and 3D Depth'.
 
 ![three js logo](./readme-img/svg-js-three-1.png)
 
