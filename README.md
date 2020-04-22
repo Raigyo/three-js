@@ -6,6 +6,8 @@
 '[3D Programming with JavaScript and the Three.js 3D Library](https://www.udemy.com/course/3d-programming-with-javascript-and-the-threejs-3d-library/): Create 3D computer graphics,
 using webgl in a cross-browser environment. Learn about 3D Graphical space, and 3D Depth.'.
 
+![three js logo](./readme-img/svg-js-three-1.png)
+
 ## About
 
 Concepts covered:
@@ -20,12 +22,17 @@ Concepts covered:
 
 ### Working with Materials
 
-- MeshBasicMaterial
-- MeshNormalMaterial
-- MeshDepthMaterial
-- LineBasicMaterial
-- PointsMaterial
-- MeshLambertMaterial (with directional light)
+- MeshBasicMaterial: not affected by light
+- MeshNormalMaterial: not affected by light but each faces has a different color
+- MeshDepthMaterial: not affected by light butassign different colors according
+to the distance from camera
+- MeshLambertMaterial: affected by light, for non-shiny surfaces, without specular highlights
+- MeshPhongMateriall: affected by light, for shiny surfaces with specular highlights.
+- MeshStandardMaterial: affected by light, standard physically based material,
+using Metallic-Roughness workflow
+
+Note: A specular highlight is the bright spot of light that appears on shiny objects
+when illuminated.
 
 ### Lights
 
