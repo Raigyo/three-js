@@ -116,9 +116,19 @@ app.get('/user-ms-picking', function(req, res) {
     res.render('pages/user-interaction/mouse-picking');
 });
 
+app.get('/user-ms-picking-move', function(req, res) {
+    res.render('pages/user-interaction/mouse-picking-move');
+});
+
 app.get('/user-ray', function(req, res) {
     res.render('pages/user-interaction/ray-object');
 });
+
+app.get('/user-balloon', function(req, res) {
+    res.render('pages/user-interaction/user-balloon');
+});
+
+
 
 //add realism
 app.get('/real-textures', function(req, res) {

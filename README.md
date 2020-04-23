@@ -53,7 +53,8 @@ It doesn't come from a specific direction.
 ### User interaction /Event Handlers
 
 - Keyboard Events
-- Mouse Events / Mouse picking / Raycast
+- Mouse Events / Mouse picking
+- Raycast (intersectObjects) / browser coordinate vs world coordinate
 
 
 ### Adding Realism
