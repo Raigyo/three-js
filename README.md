@@ -50,7 +50,10 @@ It doesn't come from a specific direction.
 - Orthographic camera: doesn't give a perspective to the scene. Object's size stays the same, no mater what is the distance from the camera.
 
 
-### User interaction
+### User interaction /Event Handlers
+
+- Keyboard Events
+- Mouse Events / Mouse picking / Raycast
 
 
 ### Adding Realism
