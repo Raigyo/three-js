@@ -99,6 +99,10 @@ app.get('/cam-perspective', function(req, res) {
     res.render('pages/camera/perspective');
 });
 
+app.get('/cam-follow', function(req, res) {
+    res.render('pages/camera/follow');
+});
+
 //user interaction
 app.get('/user-kb-event', function(req, res) {
     res.render('pages/user-interaction/keyboard-event');

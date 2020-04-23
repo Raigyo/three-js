@@ -33,3 +33,10 @@ footer {
   transform-origin: top left;
   transform: scaleX(0);
 }
+
+#info {	
+  position: absolute;
+  padding-top: 10px;
+  font-size: 50px;
+  z-index: 100;
+}

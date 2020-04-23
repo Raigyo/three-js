@@ -46,6 +46,9 @@ It doesn't come from a specific direction.
 
 ### Camera
 
+- Perspective camera:  mimics how the human eye sees. It gives a perspective to the scene - closer objects would look bigger than farther objects.
+- Orthographic camera: doesn't give a perspective to the scene. Object's size stays the same, no mater what is the distance from the camera.
+
 
 ### User interaction
 
