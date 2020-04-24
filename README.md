@@ -10,6 +10,8 @@ using webgl in a cross-browser environment. Learn about 3D Graphical space, and 
 
 ![three js logo](./readme-img/svg-js-three-1.png)
 
+See demo on [Heroku](#).
+
 ## About
 
 Concepts covered:
