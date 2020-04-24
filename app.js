@@ -4,7 +4,8 @@ var express = require('express');
 var app = express();
 
 //access 'public' as static pages/components
-app.use("/public", express.static('./public/'));
+//app.use("/public", express.static('./public/'));
+app.use(express.static("public"));
 
 //Express default directory for templates is 'views'
 //Can be changed with:
@@ -156,6 +157,6 @@ app.get('/real-pyramids', function(req, res) {
 });
 
 
-//Run server
-app.listen(3000);
-console.log('3000 is the magic port');
+// start the server listening for requests
+app.listen(process.env.PORT || 3000,
+	() => console.log("3000 is the magic port"));
