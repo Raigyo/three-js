@@ -10,7 +10,7 @@ using webgl in a cross-browser environment. Learn about 3D Graphical space, and 
 
 ![three js logo](./readme-img/svg-js-three-1.png)
 
-See demo on [Heroku](#).
+See demo on [Heroku](https://git.heroku.com/three-js-first-steps.git).
 
 ## About
 
@@ -93,7 +93,7 @@ Open the app using [http://localhost:3000/](http://localhost:3000/)
 
 ### Online
 
-See demo on [Heroku](#).
+See demo on [Heroku](https://git.heroku.com/three-js-first-steps.git).
 
 ## Useful links
 
