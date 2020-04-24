@@ -6,8 +6,8 @@
       </head>
     <body>
         <%- include ('../../partials/navbar') %>
-        <div class="instructions">
-            Blue spheres are turning around the green one that's followed by the camera
+        <div class="instructions" style="top: 15%">
+            Green sphere turns arround the blue ones followed by the camera
         </div>
         <canvas id="sceneCanvas"></canvas>
     </body>
@@ -17,7 +17,7 @@
 </html>
 
 <script>
-    //Green sphere turn arround the blue ones followed by the camera
+    //Green sphere turns arround the blue ones followed by the camera
     let scene, camera, renderer, light1;
     let sphere;//green sphere
     let ADD = 0.01, theta = 0;
