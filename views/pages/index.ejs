@@ -37,5 +37,9 @@
         renderer.render( scene, camera );
     };
 
+    // add axes to the scenes
+    axes = new THREE.AxesHelper(10);
+    scene.add(axes);
+
     animate();
 </script>

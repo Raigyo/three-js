@@ -14,7 +14,37 @@
 </html>
 
 <script>
-    let scene, camera, renderer;
+    let scene, camera, renderer, sphere, cube;
+    let ADD = 0.02;
+
+    let createGeometry = function() {
+      //add external texture
+      let texture = new THREE.TextureLoader().load(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Kanchenjunga_India.jpg/1280px-Kanchenjunga_India.jpg'
+      );
+      let material = new THREE.MeshBasicMaterial({map: texture});
+      let geometry = new THREE.BoxGeometry(6, 6, 6);
+      cube = new THREE.Mesh(geometry, material);
+      cube.position.set(6, 2, -2);
+
+      //add external texture
+      texture = new THREE.TextureLoader().load(
+      'https://upload.wikimedia.org/wikipedia/commons/2/26/Clouds_from_the_sky.jpg'
+      );
+      material = new THREE.MeshBasicMaterial({map: texture});
+      geometry = new THREE.SphereGeometry(4, 30, 30);
+      sphere = new THREE.Mesh(geometry, material);
+      sphere.position.set(-6, 2, -2);
+
+      scene.add(cube);
+      scene.add(sphere);
+
+      //add lights
+      let light1 = new THREE.DirectionalLight(0xffffff);
+      scene.add(light1);
+      let light2 = new THREE.DirectionalLight(0xffffff);
+      scene.add(light2);
+    }
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -29,13 +59,14 @@
                         1, 1000);
         camera.position.z = 20;
 
-        //fctCall()
-
         // add axes to the scenes
-        axes = new THREE.AxesHelper(10);
-        scene.add(axes);
+        // axes = new THREE.AxesHelper(10);
+        // scene.add(axes);
+
+        createGeometry();
 
         // create the renderer
+        renderer = new THREE.WebGLRenderer({antialiasing: true});
         renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
         renderer.setSize(window.innerWidth, window.innerHeight-100);
         //document.body.appendChild(renderer.domElement);
@@ -43,8 +74,12 @@
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
+      cube.rotation.x += ADD;
+      cube.rotation.y += ADD;
+      sphere.rotation.x += ADD;
+      sphere.rotation.y += ADD;
         renderer.render(scene, camera);
-        requestAnimationFrame(mainLoop);
+      requestAnimationFrame(mainLoop);
     };
 
     ///////////////////////////////////////////////

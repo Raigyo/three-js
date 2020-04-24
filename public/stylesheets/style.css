@@ -46,6 +46,60 @@ footer {
   top: 20%; /*center = 50%*/
   left: 50%;
   transform: translate(-50%, -50%);
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   font-size: 40px;
   z-index: 500;
+}
+
+#sceneCanvasHomer {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: url(public/assets/homer.jpg) no-repeat center center;
+  background-size: cover;
+  z-index: 400;
+}
+
+figure{
+  position: fixed;
+  top: 10%; /*center = 50%*/
+  left: 80%;
+  z-index: 600;
+}
+
+.prelude{
+  position: fixed;
+  top: 50%; /*center = 50%*/
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 500;
+	opacity: 1;
+	color: #1B7DEB;
+	text-shadow: 0 0 1px #1B7DEB;
+	font-size: 40px;
+    -webkit-animation-name: prelude;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: 7s;
+    -webkit-animation-iteration-count: 1;
+    -moz-animation-name: prelude;
+    -moz-animation-timing-function: linear;
+    -moz-animation-duration: 7s;
+    -moz-animation-iteration-count: 1;
+    -o-animation-name: prelude;
+    -o-animation-timing-function: linear;
+    -o-animation-duration: 7s;
+    -o-animation-iteration-count: 1;
+    -webkit-animation: fadeout 5s linear 1 normal forwards;
+}
+
+@-webkit-keyframes fadeout{
+  from{
+     opacity: 1;
+  }
+  to{
+      opacity: 0;
+  }
 }

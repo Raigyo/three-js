@@ -6,6 +6,9 @@
       </head>
     <body>
         <%- include ('../../partials/navbar') %>
+        <div class="instructions">
+          Texture into a sphere
+      </div>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
@@ -14,39 +17,59 @@
 </html>
 
 <script>
-    let scene, camera, renderer;
+    let scene, camera, renderer, sphere, target, texture;
+    let ADD = 0.005, theta = 0;
+
+    let createGeometry = function() {
+      //internal texture
+      texture = new THREE.TextureLoader().load(
+        'public/assets/panorama.jpg'
+      );
+
+      //Can be used to repeat the image if needed:
+      // texture.wrapS = THREE.RepeatWrapping;
+      // texture.wrapT = THREE.RepeatWrapping;
+      // texture.repeat.set(2, 4);
+
+      //texture mapping on the 2 sides of the object
+      let material =  new THREE.MeshBasicMaterial({map: texture, side: THREE.DoubleSide});
+      let geometry = new THREE.SphereGeometry(20, 100, 100);
+      sphere = new THREE.Mesh(geometry, material);
+      scene.add(sphere);
+    };
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
     let init = function() {
         // create the scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000000);
+        scene.background = new THREE.Color(0xffffff);
 
         // create an locate the camera
-        camera = new THREE.PerspectiveCamera(75,
+        camera = new THREE.PerspectiveCamera(70,
                         window.innerWidth / window.innerHeight,
                         1, 1000);
-        camera.position.z = 20;
 
-        //fctCall()
+        target = new THREE.Object3D();
+        camera.lookAt(target.position);
 
-        // add axes to the scenes
-        axes = new THREE.AxesHelper(10);
-        scene.add(axes);
+        createGeometry();
 
         // create the renderer
+        renderer = new THREE.WebGLRenderer({antialiasing: true});
         renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
         renderer.setSize(window.innerWidth, window.innerHeight-100);
-        //document.body.appendChild(renderer.domElement);
     };
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
+        target.position.x = 10 * Math.sin(theta);//sphere rotation
+        target.position.z = 10 * Math.cos(theta);
+        theta += ADD;
+        camera.lookAt(target.position);
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };
-
     ///////////////////////////////////////////////
     init();
     mainLoop();

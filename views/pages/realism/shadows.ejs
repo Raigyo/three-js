@@ -6,6 +6,10 @@
       </head>
     <body>
         <%- include ('../../partials/navbar') %>
+        <div class="instructions" style="color:white">
+          Yellow cube: casts and receives shadows<br />Green cube: casts shadows<br />Plain: receives
+          shadows
+      </div>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
@@ -14,7 +18,37 @@
 </html>
 
 <script>
-    let scene, camera, renderer;
+
+    let scene, camera, renderer, cube1, cube2, spotLight, plane;
+    let ADD = 0.01, theta = 0;
+
+    let createGeometry = function() {
+      let geometry = new THREE.BoxGeometry(5, 5, 5);
+      let material = new THREE.MeshPhongMaterial({color:0Xdff913,
+                      shininess: 100, side:THREE.DoubleSide});//yellow
+      cube1 = new THREE.Mesh(geometry, material);
+      cube1.position.set(5, 2, 0);
+      cube1.castShadow = true;//emit shadows
+      cube1.receiveShadow = true;//receive shadows
+
+      material = new THREE.MeshPhongMaterial({color:0X008000,
+                      shininess: 100, side:THREE.DoubleSide});//green
+      geometry = new THREE.BoxGeometry(5, 6, 4);
+      cube2 = new THREE.Mesh(geometry, material);
+      cube2.position.set(-4, 2, 0);
+      cube2.castShadow = true;
+
+      geometry = new THREE.BoxGeometry(2000, 1, 2000);
+      material = new THREE.MeshPhongMaterial({color: 0X693421,
+                                  side: THREE.DoubleSide});
+      plane = new THREE.Mesh(geometry, material);
+      plane.position.y = -1;
+      plane.receiveShadow = true;
+
+      scene.add(cube1);
+      scene.add(cube2);
+      scene.add(plane);
+    };
 
     // set up the environment -
     // initiallize scene, camera, objects and renderer
@@ -22,27 +56,46 @@
         // create the scene
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x000000);
+        scene.fog = new THREE.Fog( 0x000000);
 
         // create an locate the camera
-        camera = new THREE.PerspectiveCamera(75,
-                        window.innerWidth / window.innerHeight,
-                        1, 1000);
-        camera.position.z = 20;
+        camera = new THREE.PerspectiveCamera(70,
+                    window.innerWidth / window.innerHeight,
+                    1, 1000);
 
-        //fctCall()
+        camera.position.set(0, 5, 40);
 
-        // add axes to the scenes
-        axes = new THREE.AxesHelper(10);
-        scene.add(axes);
+        spotLight = new THREE.SpotLight(0xffffff, 1);
+        spotLight.position.set(0, 15, 10);
+        spotLight.angle = Math.PI / 2;
+        spotLight.penumbra = 0.05;
+        spotLight.decay = 2;
+        spotLight.distance = 200;
+
+        // shadow
+        spotLight.castShadow = true;
+        spotLight.shadow = new THREE.LightShadow( new
+                    THREE.PerspectiveCamera(50, 1, 10, 2500));
+        spotLight.shadow.bias = 0.0001;
+        spotLight.shadow.mapSize.width = 2048;
+        spotLight.shadow.mapSize.height = 1024;
+
+        scene.add(spotLight);
+
+        createGeometry();
 
         // create the renderer
         renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
         renderer.setSize(window.innerWidth, window.innerHeight-100);
-        //document.body.appendChild(renderer.domElement);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
     };
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
+        spotLight.position.x = 10 * Math.sin(theta);
+        spotLight.position.z = 10 * Math.cos(theta);
+        theta += ADD;
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
     };

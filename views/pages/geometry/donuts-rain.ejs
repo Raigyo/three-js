@@ -6,6 +6,9 @@
       </head>
     <body>
         <%- include ('../../partials/navbar') %>
+        <div class="instructions">
+            Donuts (taurus) rain
+        </div>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
@@ -67,7 +70,10 @@
     let init = function() {
         // create the scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000000);
+        //scene.background = new THREE.Color(0x000000);
+        const loader = new THREE.TextureLoader();
+        const bgTexture = loader.load('public/assets/homer.jpg');
+        scene.background = bgTexture;
 
         // create an locate the camera
         camera = new THREE.PerspectiveCamera(75,

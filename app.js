@@ -3,21 +3,31 @@
 var express = require('express');
 var app = express();
 
+//access 'public' as static pages/components
 app.use("/public", express.static('./public/'));
 
+//Express default directory for templates is 'views'
+//Can be changed with:
+//app.set 'views', path.join(__dirname, 'newDir')
+//or
+//app.set('views', newDir);
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+//Other exemples:
+//app.set('view engine', 'pug')
+//app.set('view engine', 'jade');
+//app.set('view engine', 'twig');
+//app.set('view engine', 'html');
 
-// use res.render to load up an ejs view file
-
+//ROUTES
 // index page
-app.get('/', function(req, res) {
-    res.render('pages/index');
+app.get('/', function(req, res) {//route (= url in navbar.ejs)
+    res.render('pages/index');// use res.render to load up an ejs view file, no need to set .ejs
 });
 
 //geometry
-app.get('/donuts', function(req, res) {//route (= url in navbar.ejs)
+app.get('/donuts', function(req, res) {
     res.render('pages/geometry/donuts-rain');//view
 });
 
@@ -108,10 +118,6 @@ app.get('/user-kb-event', function(req, res) {
     res.render('pages/user-interaction/keyboard-event');
 });
 
-app.get('/user-ms-event', function(req, res) {
-    res.render('pages/user-interaction/mouse-event');
-});
-
 app.get('/user-ms-picking', function(req, res) {
     res.render('pages/user-interaction/mouse-picking');
 });
@@ -150,7 +156,6 @@ app.get('/final-challenge', function(req, res) {
     res.render('pages/final/final-challenge');
 });
 
-
-
-app.listen(8080);
-console.log('8080 is the magic port');
+//Run server
+app.listen(3000);
+console.log('3000 is the magic port');

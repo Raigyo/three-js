@@ -5,8 +5,18 @@
         <%- include ('../../partials/head') %>
       </head>
     <body>
-        <%- include ('../../partials/navbar') %>
-        <canvas id="sceneCanvas"></canvas>
+      <%- include ('../../partials/navbar') %>
+      <figure>
+        <audio id="music" controls muted>
+          <source src="public/assets/sw.ogg" type="audio/ogg">
+          <source src="public/assets/sw.mp3" type="audio/mpeg">
+          Your web browser is outdated or don't support OGG and MP3 codecs.
+        </audio>
+      </figure>
+      <div class="prelude">
+        A long time ago in a galaxy far, <br />far away...
+      </div>
+      <canvas id="sceneCanvas"></canvas>
   </div>
     </body>
     <footer>
@@ -22,9 +32,12 @@
     // set up the environment -
     // initiallize scene, camera, objects and renderer
     function init () {
-      // create the scene
-      scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x000000);
+        // create the scene
+        scene = new THREE.Scene();
+        const loaderBckgr = new THREE.TextureLoader();
+        const bgTexture = loaderBckgr.load('public/assets/sw.jpg');
+        scene.background = bgTexture;
+
 
       // create an locate the camera
       camera = new THREE.PerspectiveCamera(70,
@@ -34,26 +47,44 @@
 
       //Load font.json and create material (async)
       let loader = new THREE.FontLoader();
-      let titles = "99 bottles of beer on the wall,\n99 bottles of beer.\nTake one down, pass it around,\n98 bottles of beer on the wall,\n98 bottles of beer.\nTake one down, pass it around,\n97 bottles of beer on the wall,\n97 bottles of beer.\nTake one down, pass it around,\n96 bottles of beer on the wall,\n96 bottles of beer.\nTake one down, pass it around,\n95 bottles of beer on the wall,\n95 bottles of beer.";
+      let contentTitle ="Three JS";
+      let content = "99 bottles of beer on the wall,\n99 bottles of beer.\nTake one down, pass it around,\n98 bottles of beer on the wall,\n98 bottles of beer.\nTake one down, pass it around,\n97 bottles of beer on the wall,\n97 bottles of beer.\nTake one down, pass it around,\n96 bottles of beer on the wall,\n96 bottles of beer.\nTake one down, pass it around,\n95 bottles of beer on the wall,\n95 bottles of beer.";
       loader.load( 'public/fonts/helvetiker_bold.typeface.json', function ( font ) {
-        let geometry = new THREE.TextGeometry(
-          titles, {font: font, size: 3, height: 0.1}
+        let geometryTitle = new THREE.TextGeometry(
+          contentTitle, {font: font, size: 5, height: 0.1}
         );
-        let  material = new THREE.MeshBasicMaterial({color:0xffffff, wireframe: false});
+
+        let geometry = new THREE.TextGeometry(
+          content, {font: font, size: 3, height: 0.1}
+        );
+        let  material = new THREE.MeshBasicMaterial({color:0xE7AE05, wireframe: false});
+        let  textTitle = new THREE.Mesh(geometryTitle , material);
+        textTitle.position.x = -15;
+        textTitle.position.y = 0;
+        textTitle.rotation.x = -0.9;
+        textTitle.size = 1;
+        scene.add(textTitle);
         let  text = new THREE.Mesh(geometry , material);
         text.position.x = -30;
+        text.position.y = -20;
         text.rotation.x = -0.9;
+        text.size = 1;
         scene.add(text);
 
         // main animation loop - calls 50-60 times per second.
         function animate() {
           requestAnimationFrame( animate );
           //text.rotation.x += ADD;
+          textTitle.position.z -= ADD;
+          textTitle.position.y += ADD / 2;
           text.position.z -= ADD;
           text.position.y += ADD / 2;
           renderer.render( scene, camera );
         }
-        animate();
+        setTimeout(function() {
+          document.getElementById("music").play();
+          animate();
+        }, 3000);
       })
 
       // create the renderer

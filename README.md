@@ -59,6 +59,10 @@ It doesn't come from a specific direction.
 
 ### Adding Realism
 
+- Textures (TextureLoader)
+- Panorama / 'Power Of Two' Rule
+- Cast shadows (add shadows from the objects). Only works with spot lights and directional lights
+
 ## How to use
 
 **Warning**: WebGL / material or hardware acceleration has to be enabled in your browser.
@@ -74,7 +78,7 @@ How to enable WebGL in your browser?
 
 ### Localy
 
-Clone, the [local-version](https://github.com/Raigyo//three-js/tree/local-version) branch.
+Clone, the [local-version](https://github.com/Raigyo/three-js/tree/local-version) branch.
 
 Then:
 
@@ -82,6 +86,8 @@ Then:
 npm install
 node app.js
 ```
+Open the app using [http://localhost:3000/](http://localhost:3000/)
+
 
 ### Online
 
@@ -92,3 +98,6 @@ See demo on [Heroku](#).
 - [3D Programming with JavaScript and the Three.js 3D Library](https://www.udemy.com/course/3d-programming-with-javascript-and-the-threejs-3d-library/)
 - [threejs](https://threejs.org/)
 - [How to deploy your app to the web using Express.js and Heroku](https://www.freecodecamp.org/news/how-to-deploy-your-site-using-express-and-heroku/)
+- [How To Create an HTTPS Server on Localhost using Express](https://medium.com/@nitinpatel_20236/how-to-create-an-https-server-on-localhost-using-express-366435d61f28)
+- [Utilisation de moteurs de modèles avec Express](https://expressjs.com/fr/guide/using-template-engines.html)
+- [Make Better Textures, The 'Power Of Two' Rule & Proper Image Dimensions](https://www.katsbits.com/tutorials/textures/make-better-textures-correct-size-and-power-of-two.php)
