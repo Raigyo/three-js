@@ -128,8 +128,6 @@ app.get('/user-balloon', function(req, res) {
     res.render('pages/user-interaction/user-balloon');
 });
 
-
-
 //add realism
 app.get('/real-textures', function(req, res) {
     res.render('pages/realism/textures');

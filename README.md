@@ -2,7 +2,9 @@
 
 *April 2020*
 
-> 🔨 Three.js main concepts. From Udemy
+> 🔨 Three.js main concepts. **Three.js** is a cross-browser JavaScript library and application
+programming interface (API) used to create and display animated 3D computer graphics in a web
+browser. Three.js uses **WebGL**. From Udemy
 '[3D Programming with JavaScript and the Three.js 3D Library](https://www.udemy.com/course/3d-programming-with-javascript-and-the-threejs-3d-library/): Create 3D computer graphics,
 using webgl in a cross-browser environment. Learn about 3D Graphical space, and 3D Depth'.
 
@@ -49,17 +51,26 @@ It doesn't come from a specific direction.
 - Perspective camera:  mimics how the human eye sees. It gives a perspective to the scene - closer objects would look bigger than farther objects.
 - Orthographic camera: doesn't give a perspective to the scene. Object's size stays the same, no mater what is the distance from the camera.
 
-
-### User interaction /Event Handlers
+### User interaction / Event Handlers
 
 - Keyboard Events
 - Mouse Events / Mouse picking
 - Raycast (intersectObjects) / browser coordinate vs world coordinate
 
-
 ### Adding Realism
 
 ## How to use
+
+**Warning**: WebGL / material or hardware acceleration has to be enabled in your browser.
+The use of WebGL needs a strong GPU (quite decent NVidia or AMD Graphic card)
+to work fluidly. It won't work without it, even with a powerfull CPU.
+
+How to enable WebGL in your browser?
+
+- [Chrome](https://www.quora.com/How-do-I-enable-WebGL-2-0-in-Chrome)
+- [Firefox](https://www.interplaylearning.com/help/how-to-enable-webgl-in-firefox)
+- [Explorer 11 / Edge](https://support.microsoft.com/en-us/help/2528233/how-to-enable-or-disable-software-rendering-in-internet-explorer)
+- [Safari](https://www.wikihow.com/Enable-Webgl#Using-Safari)
 
 ### Localy
 
@@ -80,3 +91,4 @@ See demo on [Heroku](#).
 
 - [3D Programming with JavaScript and the Three.js 3D Library](https://www.udemy.com/course/3d-programming-with-javascript-and-the-threejs-3d-library/)
 - [threejs](https://threejs.org/)
+- [How to deploy your app to the web using Express.js and Heroku](https://www.freecodecamp.org/news/how-to-deploy-your-site-using-express-and-heroku/)

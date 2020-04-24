@@ -25,60 +25,52 @@
         let x = Math.random() * (to - from);
         return x + from;
     };
-
+    //Class to create the balloons
     class Balloon {
         constructor() {
             let x = randomInRange(-30, 30);
             let z = randomInRange(20, -20);
             let geometry = new THREE.SphereGeometry(3, 30, 30);
             let material = new THREE.MeshPhongMaterial({color: Math.random() * 0Xffffff,
-                                    shininess: 100});
+                                    shininess: 100});//color is randimized
             let b = new THREE.Mesh(geometry, material);
             b.position.set(x, 0, z);
             this.object = b;
 
             scene.add(b);
 
-            this.ADD = randomInRange(0.05, 0.15);
-            this.over = false;
-            this.TOP = 50;
+            this.ADD = randomInRange(0.05, 0.15);//speed for each balloon
+            this.over = false;//to check if ballon has reached the top of the screen
+            this.TOP = 50;//top property value
         }
 
-        advance() {
+        advance() {//change properties of the object tomove it
             this.object.position.y += this.ADD;
             if(this.object.position.y > this.TOP)
-                this.over = true;
+                this.over = true;//reached the top of the screen
         }
     };
 
+    //Click event, detect if we click on a balloon
     let onMouseClick = function(e) {
         mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
         mouse.y = - (e.clientY / window.innerHeight) * 2 + 1;
         mouse.z = 1;
-
+        // update the picking ray with the camera and mouse position
         rayCast.setFromCamera(mouse, camera);
+        // calculate objects intersecting the picking ray
         intersects = rayCast.intersectObjects(scene.children);
 
-        if(intersects.length == 0)
+        if(intersects.length == 0)//no hit/intersects : nothing to do
             return;
-        let hit = intersects[0].object;
+        let hit = intersects[0].object;//current ballon hit, [0] in array of raycast
 
         balloons.forEach((b,ind) => {
-                                    if(b.object == hit) {
-                                        balloons.splice(ind, 1);
-                                        scene.remove(b.object);
+                                    if(b.object == hit) {//if the balloon array = the balloon hit
+                                        balloons.splice(ind, 1);//remove from array
+                                        scene.remove(b.object);//remove from scene
                                     }
                                 });
-
-
-       /* intersects.forEach(obj => {
-                                balloons.forEach((b,ind) => {
-                                    if(b.object == obj.object) {
-                                        balloons.splice(ind, 1);
-                                        scene.remove(b.object);
-                                    }
-                                });
-                            });*/
     };
 
 
@@ -104,7 +96,7 @@
         scene.add(light1);
         scene.add(light2);
 
-
+        //RAYCAST
         rayCast = new THREE.Raycaster();
         mouse = new THREE.Vector2();
         mouse.x = mouse.y = -1;
@@ -117,13 +109,13 @@
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
         let rand = Math.random();
-        if(rand < 0.05)
-            balloons.push(new Balloon());
+        if(rand < 0.05)//5% of the time, add a new ballooon
+            balloons.push(new Balloon());//add ballon in constructor
 
-        balloons.forEach((b, ind) => { b.advance()
-                                if(b.over) {
-                                    balloons.splice(ind, 1);
-                                    scene.remove(b.object);
+        balloons.forEach((b, ind) => { b.advance()//advancing all the balloon
+                                if(b.over) {//if the balloon reaches the top over = true)
+                                    balloons.splice(ind, 1);//remove object from array
+                                    scene.remove(b.object);//remove object from scene
                                 }
                               });
 
