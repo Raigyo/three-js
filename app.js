@@ -4,8 +4,8 @@ var express = require('express');
 var app = express();
 
 //access 'public' as static pages/components
-//app.use("/public", express.static('./public/'));
-app.use(express.static("public"));
+app.use("/public", express.static('./public/'));
+//app.use(express.static("public"));
 
 //Express default directory for templates is 'views'
 //Can be changed with:
