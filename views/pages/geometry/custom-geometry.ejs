@@ -6,6 +6,9 @@
       </head>
     <body>
         <%- include ('../../partials/navbar') %>
+        <div class="instructions">
+           Custom geometry
+        </div>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
@@ -59,8 +62,10 @@
 
     // main animation loop - calls 50-60 times per second.
     let mainLoop = function() {
-        shape.geometry.vertices[1].y -= 0.02;
-        shape.geometry.verticesNeedUpdate = true;//needed otherwise updates on shape won't show
+        shape.rotation.x += ADD;
+        shape.rotation.y += ADD;
+        //shape.geometry.vertices[1].y -= 0.02;
+        //shape.geometry.verticesNeedUpdate = true;//needed otherwise updates on shape won't show
 
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);

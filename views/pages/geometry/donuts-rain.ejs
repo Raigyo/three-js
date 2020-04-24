@@ -32,7 +32,7 @@
     let createDonut = function() {
         let geometry = new THREE.TorusGeometry(1, 0.5, 5, 30);
         //random color by multiplying color with a number between 0 and 1
-        let material = new THREE.MeshBasicMaterial({color: Math.random() * 0xffffff});
+        let material = new THREE.MeshBasicMaterial({color: Math.random() * 0xffffff, wireframe: true});
         let d = new THREE.Mesh( geometry, material );
 
         d.position.x = randomInRange(-15, 15);//random position

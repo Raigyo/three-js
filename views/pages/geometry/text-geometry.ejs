@@ -26,7 +26,7 @@
 
 <script>
     let scene, camera, renderer, text;
-    let ADD = 0.01, theta = 0;
+    let ADD = 0.02, theta = 0;
     init();
 
     // set up the environment -
@@ -51,7 +51,7 @@
       let content = "99 bottles of beer on the wall,\n99 bottles of beer.\nTake one down, pass it around,\n98 bottles of beer on the wall,\n98 bottles of beer.\nTake one down, pass it around,\n97 bottles of beer on the wall,\n97 bottles of beer.\nTake one down, pass it around,\n96 bottles of beer on the wall,\n96 bottles of beer.\nTake one down, pass it around,\n95 bottles of beer on the wall,\n95 bottles of beer.";
       loader.load( 'public/fonts/helvetiker_bold.typeface.json', function ( font ) {
         let geometryTitle = new THREE.TextGeometry(
-          contentTitle, {font: font, size: 5, height: 0.1}
+          contentTitle, {font: font, size: 8, height: 0.1}
         );
 
         let geometry = new THREE.TextGeometry(
@@ -59,7 +59,7 @@
         );
         let  material = new THREE.MeshBasicMaterial({color:0xE7AE05, wireframe: false});
         let  textTitle = new THREE.Mesh(geometryTitle , material);
-        textTitle.position.x = -15;
+        textTitle.position.x = -25;
         textTitle.position.y = 0;
         textTitle.rotation.x = -0.9;
         textTitle.size = 1;

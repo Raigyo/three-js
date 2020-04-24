@@ -151,10 +151,10 @@ app.get('/real-shadows', function(req, res) {
     res.render('pages/realism/shadows');
 });
 
-//final challenge
-app.get('/final-challenge', function(req, res) {
-    res.render('pages/final/final-challenge');
+app.get('/real-pyramids', function(req, res) {
+    res.render('pages/realism/pyramids');
 });
+
 
 //Run server
 app.listen(3000);

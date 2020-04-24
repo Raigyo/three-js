@@ -7,38 +7,28 @@ a {
 }
 
 footer {
-  align-items: center;
-  justify-content: center;
-}
-
-#loading {
   position: fixed;
-  top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#loading .progress {
-  margin: 1.5em;
-  border: 1px solid white;
-  width: 50vw;
-}
-#loading .progressbar {
-  margin: 2px;
-  background: white;
-  height: 1em;
-  transform-origin: top left;
-  transform: scaleX(0);
+  color: black;
+  text-align: center;
 }
 
-#info {	
-  position: absolute;
-  padding-top: 10px;
-  font-size: 50px;
-  z-index: 100;
+figure{
+  position: fixed;
+  top: 10%; /*center = 50%*/
+  left: 80%;
+  z-index: 600;
+}
+
+#sceneCanvasHomer {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: url(public/assets/homer.jpg) no-repeat center center;
+  background-size: cover;
+  z-index: 400;
 }
 
 .instructions {
@@ -52,22 +42,6 @@ footer {
   -webkit-text-stroke-color: black;
   font-size: 40px;
   z-index: 500;
-}
-
-#sceneCanvasHomer {
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  background: url(public/assets/homer.jpg) no-repeat center center;
-  background-size: cover;
-  z-index: 400;
-}
-
-figure{
-  position: fixed;
-  top: 10%; /*center = 50%*/
-  left: 80%;
-  z-index: 600;
 }
 
 .prelude{

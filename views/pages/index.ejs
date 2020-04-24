@@ -6,6 +6,9 @@
       </head>
     <body>
         <%- include ('../partials/navbar') %>
+        <div class="instructions">
+          Welcome
+          </div>
         <canvas id="sceneCanvas"></canvas>
     </body>
     <footer>
@@ -14,32 +17,104 @@
 </html>
 
 <script>
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+  const LEFT = 37, RIGHT = 39, UP = 38, DOWN = 40;
+  let scene, camera, renderer, light;
+  let particles = []
+  let ADD = 0.2;
 
-        // create the renderer
-        renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
-        renderer.setSize(window.innerWidth, window.innerHeight-100);
+  let randomInRange = function(from, to) {
+      let x = Math.random() * (to - from);
+      return x + from;
+  };
 
-    var geometry = new THREE.BoxGeometry();
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    var cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+  //Class that represents a single ball
+  class Particle {
+      constructor() {
+          let geometry = new THREE.SphereGeometry(0.5, 30, 30);
+          let material = new THREE.MeshPhongMaterial({
+            color: 0Xffffff, shininess: 100,
+            specular: 0xafeeee,
+            side: THREE.DoubleSide
+          });
+          this.mesh = new THREE.Mesh(geometry, material);
 
-    camera.position.z = 5;
+          this.mesh.position.x = randomInRange(-15, 15);
+          this.mesh.position.y = randomInRange(-5, 5);
+          this.mesh.position.z = randomInRange(-10, 10);
+          this.radius = this.mesh.position.x;
 
-    var animate = function () {
-        requestAnimationFrame( animate );
+          this.theta = 0;
+          this.dTheta = 2 * Math.PI / randomInRange(150, 200);
+          this.yFactor = randomInRange(0, Math.PI);
+      }
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+      move() {
+          this.mesh.position.y =  this.radius * Math.sin(this.theta + this.yFactor);
+          this.mesh.position.x =  this.radius * Math.sin(this.theta);
+          this.mesh.position.z = this.radius * Math.cos(this.theta);
+          this.theta += this.dTheta;
+      }
+  };//\class Particle
 
-        renderer.render( scene, camera );
-    };
+  let onKeyDown = function(e) {
+      if(e.keyCode == UP)
+          camera.position.z -= ADD;
+      else if(e.keyCode == DOWN)
+          camera.position.z += ADD;
+  };
 
-    // add axes to the scenes
-    axes = new THREE.AxesHelper(10);
-    scene.add(axes);
+  let createGeometry = function() {
+      for(let i = 1; i <= 50; i++) {
+          let p = new Particle();
+          particles.push(p);
+          scene.add(p.mesh);
+      }
+  };
 
-    animate();
+
+  // set up the environment -
+  // initiallize scene, camera, objects and renderer
+  let init = function() {
+      // create the scene
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+
+      // create an locate the camera
+      camera = new THREE.PerspectiveCamera(75,
+                      window.innerWidth / window.innerHeight,
+                      1, 1000);
+      camera.position.z = 20;
+
+      light = new THREE.PointLight(0xffffff, 2, 30, 2);
+
+      let light2 = new THREE.PointLight(0xffffff, 2, 30, 2);
+      let light3 = new THREE.PointLight(0xffffff, 2, 30, 2);
+      light2.position.y = 10;
+      light3.position.y = -10;
+
+      scene.add(light);
+      scene.add(light2);
+      scene.add(light3);
+
+      createGeometry();
+
+      // create the renderer
+      renderer = new THREE.WebGLRenderer({antialiasing: true});
+      renderer = new THREE.WebGLRenderer( { canvas: sceneCanvas } );
+      document.addEventListener("keydown", onKeyDown, false);
+      renderer.setSize(window.innerWidth, window.innerHeight-100);
+  };
+
+
+  // main animation loop - calls 50-60 times per second.
+  let mainLoop = function() {
+      particles.forEach(p => p.move());
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(mainLoop);
+  };
+
+  ///////////////////////////////////////////////
+  init();
+  mainLoop();
 </script>
