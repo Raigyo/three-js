@@ -19,6 +19,6 @@
     "three-fbx-loader": "^1.0.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.8"
   }
 }
